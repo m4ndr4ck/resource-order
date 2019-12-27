@@ -14,12 +14,14 @@ que se integra com a API do cluster.
 ```
 minikube start --vm-driver=virtualbox --memory='2500mb'
 ```
-Habilite o ingress
+Habilite o ingress do Nginx:
 ```
 minikube addons enable ingress
 ```
 
-Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu Minikube **{ip.do.minikube} services.oss.redecorp**
+Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu Minikube:
+**{ip.do.minikube} services.oss.redecorp**
+
 ```
 minikube ssh ifconfig | grep eth1 -A1 | grep "inet addr" | cut -d: -f2| awk '{ print $1 }'
 ```
@@ -44,7 +46,7 @@ componentes de rede como vFirewall ou vRouter que são utilizados na criação d
 
 
 
-## Para rodar o Resource Oorder
+## Para rodar o Resource Order
 
 ```
 mvn clean package
