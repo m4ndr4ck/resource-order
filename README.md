@@ -20,6 +20,7 @@ minikube addons enable ingress
 ```
 
 Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu Minikube:
+
 **{ip.do.minikube} services.oss.redecorp**
 
 ```
