@@ -59,3 +59,29 @@ docker build . -t oss/resource-order:1.0
 ```
 kubectl apply -f k8s/deployment.yaml 
 ```
+
+Exemplo de payload:
+
+```
+curl --header "Content-Type: application/json" --request POST --data '[{"id":"5e057c40cc5ed83c81faa3c4"},{"id":"5e057c57cc5ed83c81faa3c5"}]' http://services.oss.redecorp/resource-order/v1/createorder
+```
+
+Resposta:
+```
+{
+  "id": "5e057c9f9762581ce6d8aeb4",
+  "networkComponent": [
+    {
+      "id": "5e057c40cc5ed83c81faa3c4",
+      "name": "vRouter",
+      "status": "ATIVADO"
+    },
+    {
+      "id": "5e057c57cc5ed83c81faa3c5",
+      "name": "vFirewall",
+      "status": "ATIVADO"
+    }
+  ]
+}
+```
+
