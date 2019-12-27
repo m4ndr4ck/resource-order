@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: resource-order # Deve ter o mesmo nome do service no Kubernetes
+  data:
+    mongodb:
+      #uri: mongodb://admin:admin@192.168.99.102:30485/admin
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb/${MONGO_DATABASE}
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"

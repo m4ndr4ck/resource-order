@@ -1,1 +1,57 @@
-# resource-order
+# Resource Order
+
+Esse sistema ilustra a construção de aplicações nativas para nuvem que utilizam arquitetura hexagonal
+e são orquestradas como microserviços.
+
+Os recursos nativos do Kubernetes são utilizados para aplicar técnicas de Service Discovery na comunicação
+inter-servicos, API Gateway com ingress para expor externamente os endpoints do sistema e uso de ConfigMaps e
+Secrets para fornecer variáveis de ambiente. Tais recursos se tornam possíveis graças ao Spring Cloud Kubernetes
+que se integra com a API do cluster. 
+
+## Configurando ambiente de desenvolvimento
+```
+minikube start --vm-driver=virtualbox --memory='2500mb'
+```
+Habilite o ingress
+```
+minikube addons enable ingress
+```
+
+Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu Minikube **{ip.do.minikube} services.oss.redecorp**
+```
+minikube ssh ifconfig | grep eth1 -A1 | grep "inet addr" | cut -d: -f2| awk '{ print $1 }'
+```
+
+Após rodar **mvn clean package** e o **docker build** em cada aplicação, instale os objetos que estão em k8s e também no repositório Resource Order Infra
+```
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f ingress.yaml
+kubectl apply -f mongodb-configmap.yaml
+kubectl apply -f mongodb-secret.yaml
+kubectl apply -f mongodb-deployment.yaml
+```
+
+## Arquitetura
+
+- **[Resource Order](https://github.com/m4ndr4ck/resource-order)** - Responsável pela execução de ordens que contenham componentes de rede ativos.
+Para realizar isso existe uma integração com o Resource Order Orchestration.
+- **[Resource Order Orchestration](https://github.com/m4ndr4ck/resource-order-orchestration)** - Permite a criação de
+componentes de rede como vFirewall ou vRouter que são utilizados na criação de novas ordens. 
+- **[Resource Order Gateway](https://github.com/m4ndr4ck/resource-order-gateway)** - Gateway do Swagger que agrega as APIs de todos os microserviços do sistema.
+- **[Resource Order Infra](https://github.com/m4ndr4ck/resource-order-infra)** - Contém os objetos do Kubernetes para instalação do MongoDB e do Ingress como API Gateway
+
+
+
+## Para rodar o Resource Oorder
+
+```
+mvn clean package
+```
+
+```
+docker build . -t oss/resource-order:1.0 
+```
+
+```
+kubectl apply -f k8s/deployment.yaml 
+```
