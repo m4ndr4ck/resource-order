@@ -11,6 +11,7 @@ que se integra com a API do cluster.
 ![Arquitetura](https://github.com/m4ndr4ck/resource-order/blob/master/src/main/resources/microservicos-hexagonal.png?raw=true) 
 
 ## Configurando ambiente de desenvolvimento
+
 ```
 minikube start --vm-driver=virtualbox --memory='2500mb'
 ```
@@ -25,6 +26,11 @@ Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu 
 
 ```
 minikube ssh ifconfig | grep eth1 -A1 | grep "inet addr" | cut -d: -f2| awk '{ print $1 }'
+```
+
+Ajuste o Docker para construir as imagens utilizando o ambiente do Minikube
+```
+eval $(minikube docker-env)
 ```
 
 Após rodar **mvn clean package** e o **docker build** em cada aplicação, instale os objetos que estão em k8s e também no repositório Resource Order Infra
