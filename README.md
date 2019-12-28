@@ -28,18 +28,18 @@ Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu 
 minikube ssh ifconfig | grep eth1 -A1 | grep "inet addr" | cut -d: -f2| awk '{ print $1 }'
 ```
 
-Ajuste o Docker para construir as imagens utilizando o ambiente do Minikube
+Ajuste o Docker para construir as imagens utilizando o ambiente do Minikube:
 ```
 eval $(minikube docker-env)
 ```
 
-Após rodar **mvn clean package** e o **docker build** em cada aplicação, instale os objetos que estão em k8s e também no repositório Resource Order Infra
+Instale **primeiro** os objetos do Resource Order Infra, depois rode **mvn clean package** e o **docker build** em cada aplicação:
 ```
-kubectl apply -f k8s/deployment.yaml
 kubectl apply -f ingress.yaml
 kubectl apply -f mongodb-configmap.yaml
 kubectl apply -f mongodb-secret.yaml
 kubectl apply -f mongodb-deployment.yaml
+kubectl apply -f k8s/deployment.yaml
 ```
 
 ## Arquitetura
@@ -49,7 +49,7 @@ Para realizar isso existe uma integração com o Resource Order Orchestration.
 - **[Resource Order Orchestration](https://github.com/m4ndr4ck/resource-order-orchestration)** - Permite a criação de
 componentes de rede como vFirewall ou vRouter que são utilizados na criação de novas ordens. 
 - **[Resource Order Gateway](https://github.com/m4ndr4ck/resource-order-gateway)** - Gateway do Swagger que agrega as APIs de todos os microserviços do sistema.
-- **[Resource Order Infra](https://github.com/m4ndr4ck/resource-order-infra)** - Contém os objetos do Kubernetes para instalação do MongoDB e do Ingress como API Gateway
+- **[Resource Order Infra](https://github.com/m4ndr4ck/resource-order-infra)** - Contém os objetos do Kubernetes para instalação do MongoDB e do Ingress como API Gateway.
 
 
 
