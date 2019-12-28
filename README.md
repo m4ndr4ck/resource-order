@@ -68,7 +68,7 @@ docker build . -t oss/resource-order:1.0
 kubectl apply -f k8s/deployment.yaml 
 ```
 
-Exemplo de payload:
+Exemplo de payload (utilize o IDs gerado pelo Resource Order Orchestration):
 
 ```
 curl --header "Content-Type: application/json" --request POST --data '[{"id":"5e057c40cc5ed83c81faa3c4"},{"id":"5e057c57cc5ed83c81faa3c5"}]' http://services.oss.redecorp/resource-order/v1/createorder
