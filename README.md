@@ -24,8 +24,13 @@ Rode o comando abaixo e adicione no arquivo hosts com o IP da VM onde está seu 
 
 **{ip.do.minikube} services.oss.redecorp**
 
+No Linux
 ```
 minikube ssh ifconfig | grep eth1 -A1 | grep "inet addr" | cut -d: -f2| awk '{ print $1 }'
+```
+No Windows
+```
+minikube ssh ifconfig  | findstr "inet addr" | findstr 192
 ```
 
 Ajuste o Docker para construir as imagens utilizando o ambiente do Minikube:
