@@ -44,7 +44,7 @@ Instale **primeiro** os objetos do Resource Order Infra, em seguida instale os o
 ```
 kubectl apply -f ingress.yaml 
 kubectl apply -f mongodb-configmap.yaml 
-kubectl apply -f mondodb-secret.yaml 
+kubectl apply -f mongodb-secret.yaml 
 kubectl apply -f mongodb-deployment.yaml 
 kubectl apply -f serviceaccount-rbac.yaml
 kubectl apply -f elastic.yaml
