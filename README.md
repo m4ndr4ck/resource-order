@@ -8,7 +8,7 @@ inter-servicos, API Gateway com ingress para expor externamente os endpoints do 
 Secrets para fornecer variáveis de ambiente. Tais recursos se tornam possíveis graças ao Spring Cloud Kubernetes
 que se integra com a API do cluster.
 
-![Arquitetura](https://github.com/m4ndr4ck/resource-order/blob/master/src/main/resources/microservicos-hexagonal.png?raw=true) 
+![Arquitetura](https://github.com/m4ndr4ck/resource-order/blob/master/src/main/resources/microservicos-hexagonal-v2.png?raw=true) 
 
 ## Configurando ambiente de desenvolvimento
 
