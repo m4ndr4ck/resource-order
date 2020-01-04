@@ -8,6 +8,10 @@ inter-servico, API Gateway com ingress para expor externamente os endpoints do s
 Secrets para fornecer variáveis de ambiente. Tais recursos se tornam possíveis graças ao Spring Cloud Kubernetes
 que se integra com a API do cluster.
 
+Os logs são capturados pelo Fluentd através de um DaemonSet que cria um pod, que atua como agente, em cada nó do cluster. Os logs são então enviados para o Elasticsearch.
+
+Grafana e Prometheus são utilizados para monitoramento da infraestrutura.
+
 É aplicado também a técnica de Auto Trace com OpenTracing, Jaeger e Kubernetes Mutating Webhooks.
 
 ![Arquitetura](https://github.com/m4ndr4ck/resource-order/blob/master/src/main/resources/microservicos-hexagonal-v2.png?raw=true) 
@@ -15,7 +19,7 @@ que se integra com a API do cluster.
 ## Configurando ambiente de desenvolvimento
 
 ```
-minikube start --vm-driver=virtualbox --memory='2500mb'
+minikube start --vm-driver=virtualbox --memory='5000mb'
 ```
 Habilite o ingress do Nginx:
 ```
@@ -64,7 +68,7 @@ Para realizar isso existe uma integração com o Resource Order Orchestration.
 - **[Resource Order Orchestration](https://github.com/m4ndr4ck/resource-order-orchestration)** - Permite a criação de
 componentes de rede como vFirewall ou vRouter que são utilizados na criação de novas ordens. 
 - **[Resource Order Gateway](https://github.com/m4ndr4ck/resource-order-gateway)** - Gateway do Swagger que agrega as APIs de todos os microserviços do sistema.
-- **[Resource Order Infra](https://github.com/m4ndr4ck/resource-order-infra)** - Contém os objetos do Kubernetes para instalação do MongoDB, ELK, Fluentd e do Ingress como API Gateway.
+- **[Resource Order Infra](https://github.com/m4ndr4ck/resource-order-infra)** - Contém os objetos do Kubernetes para instalação do MongoDB, ELK, Fluentd, Prometheus, Grafana e do Ingress como API Gateway.
 - **[Auto Tracing Webhook](https://github.com/m4ndr4ck/auto-tracing-webhook)** - Contém os objetos do Kubernetes para instalação do Mutating Webhook e do Jaeger.
 
 ## Para rodar o Resource Order
