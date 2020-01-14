@@ -70,6 +70,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
         </dependency>
+	<dependency>
+		<groupId>net.bull.javamelody</groupId>
+		<artifactId>javamelody-spring-boot-starter</artifactId>
+		<version>1.81.0</version>
+	</dependency>
     </dependencies>
 
     <build>

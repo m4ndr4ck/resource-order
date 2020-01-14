@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: resource-order
+        autotrace: enabled
     spec:
       containers:
         - name: resource-order
